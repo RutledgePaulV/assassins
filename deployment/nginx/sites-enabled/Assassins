@@ -1,0 +1,48 @@
+server_names_hash_bucket_size 64;
+
+upstream app {
+    server unix:/opt/sockets/gunicorn.sock fail_timeout=0;
+}
+
+server {
+
+    listen 80;
+    charset utf-8;
+    server_name assassins.io;
+
+    location = /favicon.ico {
+        access_log off;
+        log_not_found off;
+    }
+
+    location /static {
+        add_header X-PROXY NGINX-STATIC;
+        alias /opt/serve_static;
+    }
+
+    location /media {
+        add_header X-PROXY NGINX-MEDIA;
+        alias /opt/serve_media;
+    }
+
+    location / {
+        error_page 500 501 502 503 504 = /500;
+        add_header X-PROXY DJANGO;
+        proxy_pass http://app;
+        proxy_redirect off;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+
+    location = /500 {
+        index 500.html;
+        root /etc/nginx/error-pages;
+    }
+
+    location = /nginx {
+        stub_status on;
+        access_log  off;
+   }
+
+}

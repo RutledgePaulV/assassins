@@ -1,0 +1,11 @@
+{% load staticfiles %}
+{% load global_tags %}
+{% load socialaccount %}
+{% load compress %}
+
+{% compress js %}
+	<script type="text/javascript" src="{% static 'jquery/dist/jquery.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'jquery.cookie/jquery.cookie.js' %}"></script>
+	<script type="text/javascript" src="{% static 'bootstrap/dist/js/bootstrap.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'scripts/config/analytics.js' %}"></script>
+{% endcompress %}

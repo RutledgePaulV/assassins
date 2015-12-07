@@ -1,0 +1,28 @@
+<div class="container">
+	<div class="row" style="margin-top: 35px;">
+		<div class="col-md-6">
+			<ul>
+				{# Link to contact page #}
+				{% url 'site:contact' as link %}
+				{% with text='Contact' %}
+					{% if request.get_full_path == link %}
+						<li class="active"><a href="{{ link }}">{{ text }}</a></li>
+					{% else %}
+						<li><a href="{{ link }}">{{ text }}</a></li>
+					{% endif %}
+				{% endwith %}
+
+				<li><a href="#">History of Game</a></li>
+				<li><a href="#">Terms of Service</a></li>
+			</ul>
+		</div>
+		<div class="col-md-6">
+			<p>
+				Despite the vicious title, <a href="{% url 'site:index' %}">assassins</a> is a game that brings people
+				together. Here at <a href="#">Illumine Pixels</a> we strive every day to find new ways to use our skills
+				in technology to create solutions for problems that help people live happy and meaningful lives. Thank
+				you for all of your support!
+			</p>
+		</div>
+	</div>
+</div>

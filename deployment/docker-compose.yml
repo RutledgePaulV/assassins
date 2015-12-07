@@ -1,0 +1,67 @@
+# the nginx webserver
+nginx:
+  restart: always
+  build: ./nginx/
+  env_file: ./prod.env
+  command: bash -c "/opt/scripts/newrelic.sh && exec /usr/sbin/nginx"
+  ports:
+    - "80:80"
+  volumes_from:
+    - data
+  links:
+    - application:application
+
+
+# the actual django application container
+application:
+  restart: always
+  build: ./application
+  env_file: ./prod.env
+  command: bash -c "/opt/scripts/make_statics.sh && /opt/scripts/migrations.sh && /opt/scripts/run_server.sh"
+  expose:
+    - "8000"
+    - "5555"
+  volumes_from:
+    - data
+  links:
+    - postgres:postgres
+    - rabbitmq:rabbitmq
+
+
+# rabbit mq for celery
+rabbitmq:
+  restart: always
+  image: rabbitmq:latest
+  expose:
+    - "5672"
+  volumes_from:
+    - data
+
+
+# our database container that runs the database service
+postgres:
+  restart: always
+  image: postgres:latest
+  expose:
+    - "5432"
+  volumes_from:
+    - data
+
+
+# things we want to preserve across restarts or plan to backup
+data:
+  restart: no
+  command: true
+  image: postgres:latest
+  volumes:
+    # database data
+    - /var/lib/postgresql
+
+    # any user uploaded files
+    - /opt/serve_media
+
+    # any static files to be served by the web server
+    - /opt/serve_static
+
+    # our unix socket for communication between nginx and the app
+    - /opt/sockets

@@ -1,0 +1,52 @@
+{% extends 'site.html' %}
+{% load staticfiles %}
+
+{% block page_styles %}
+	<link href="{% static 'style/Site/index.less' %}" type="text/less" rel="stylesheet"/>
+{% endblock %}
+
+{% block main-contents %}
+	<div class="jumbotron">
+		<h1 class="text-center">You ready, killa?</h1>
+		<br/>
+		<div class="center-block" style="width: 750px; margin:auto;">
+			<iframe src="//player.vimeo.com/video/36341233?title=0&amp;byline=0&amp;portrait=0&amp;color=d6d6d6"
+			        width="750" height="360" frameborder="0" webkitallowfullscreen
+			        mozallowfullscreen allowfullscreen></iframe>
+		</div>
+
+		<br/>
+		<h2 class="text-center">Do you even ninja, bro?</h2>
+
+	</div>
+
+	<div class="container text-section">
+		<div class="row">
+			<div class="col-md-4 text-center">
+				<h3 class="text-center">For Friends</h3>
+
+				<p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor
+					mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna
+					mollis euismod. Donec sed odio dui.
+				</p>
+			</div>
+			<div class="col-md-4 text-center">
+				<h3 class="text-center">For Laughs</h3>
+
+				<p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor
+					mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna
+					mollis euismod. Donec sed odio dui.
+				</p>
+			</div>
+			<div class="col-md-4 text-center">
+				<h3>For Growth</h3>
+
+				<p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor
+					mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna
+					mollis euismod. Donec sed odio dui.
+				</p>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}

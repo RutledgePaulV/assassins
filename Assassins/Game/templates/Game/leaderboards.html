@@ -1,0 +1,46 @@
+{% extends 'Game/base_game_view.html' %}
+{% load gametags %}
+{% load staticfiles %}
+{% load require %}
+
+{% block game-view-styles %}
+	<link href="{% static 'style/Game/leaderboards.less' %}" type="text/less" rel="stylesheet"/>
+{% endblock %}
+
+{% block inline_scripts %}
+	{% require_module 'scripts/game/leaderboards/main' %}
+{% endblock %}
+
+{% block game-top-insert %}
+	<div id="cover-photo" class="cover-photo jumbotron">
+		<div class="title-and-menu"><h2>{{ game.title }}</h2></div>
+	</div>
+{% endblock %}
+
+{% block game-content-section %}
+
+	<div class="members">
+
+		<div id="player-results">
+			{% for entry in leaderboards %}
+				<div class="box size12">
+					<div class="thumbnail">
+						{% if not entry.alive %}
+							<img src="{{ entry.player.profile.thumb.url }}" class="player-killed"/>
+						{% else %}
+							<img src="{{ entry.player.profile.thumb.url }}"/>
+						{% endif %}
+						<div class="caption">
+							<h3>{{ entry.player.get_full_name }}</h3>
+							<p>
+								Kills: {{ entry.kills }}
+							</p>
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+
+	</div>
+
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends "site.html" %}
+{% load global_tags %}
+{% load staticfiles %}
+{% load account %}
+
+{% block page_styles %}
+	<link href="{% static 'style/Member/login.less' %}" rel="stylesheet" type="text/less"/>
+{% endblock %}
+
+{% block main-contents %}
+
+	<div class="jumbotron action-area">
+
+		{% if confirmation and not confirmation.email_address.verified %}
+
+			<h3>Confirm E-mail Address</h3>
+
+			{% with confirmation.email_address.email as email %}
+				<p>
+					Please confirm that <a href="mailto:{{ email }}">{{ email }}</a> is your e-mail address.
+				</p>
+			{% endwith %}
+
+			<form method="post" action="{% url 'account_confirm_email' confirmation.key %}">
+				{% csrf_token %}
+				<button class="btn btn-default" type="submit">Confirm</button>
+			</form>
+
+		{% elif confirmation.email_address.verified %}
+
+			<h3>No action needed!</h3>
+			<p>{{ confirmation.email_address.email }} has already been verified!</p>
+
+		{% else %}
+			<h3>Confirm E-mail Address</h3>
+
+			{% url 'account_email' as email_url %}
+			<p>
+				This e-mail confirmation link expired or is invalid. Please
+				<a href="{{ email_url }}">issue a new e-mail confirmation request</a>.
+			</p>
+		{% endif %}
+	</div>
+
+{% endblock %}

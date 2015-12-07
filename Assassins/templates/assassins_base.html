@@ -1,0 +1,38 @@
+{% load global_tags %}
+{% pretty %}
+
+	<html>
+
+	{# All blocks in this file should be prefixed with 'base_' to avoid accidental overriding #}
+	<head>
+
+		{# Where we will define any and all meta data for the site #}
+		{% block base_meta_data %}{% endblock %}
+
+		{# Where we will put any and all style sheets for the site #}
+		{% block base_stylesheets %}{% endblock %}
+
+		{# Where we will load any JS files & tags for the site #}
+		{% block base_head_scripts %}{% endblock %}
+
+		{# we don't want to have to compile inline styles that change often #}
+		{% block inline_styles %}{% endblock %}
+
+	</head>
+
+		<body class="{% block body-class %}{% endblock %}">
+
+			{# This gives us a place to include any server values that we'll need JS access to #}
+			{% block base_hidden_includes %}{% endblock %}
+
+			{# Where all the actual content for the site will go #}
+			{% block base_body_content %}{% endblock %}
+
+			{# Where any hidden blocks can be loaded and displayed later #}
+			{% block offscreen %}{% endblock %}
+
+		</body>
+
+	</html>
+
+{% endpretty %}

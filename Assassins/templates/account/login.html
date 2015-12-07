@@ -1,0 +1,77 @@
+{% extends "site.html" %}
+{% load global_tags %}
+{% load staticfiles %}
+{% load require %}
+{% load account %}
+
+
+{% block page_styles %}
+	<link href="{% static 'style/Member/login.less' %}" rel="stylesheet" type="text/less"/>
+{% endblock %}
+
+{% block inline_scripts %}
+	{% require_module 'scripts/member/auth/login/main' %}
+{% endblock %}
+
+{% block main-contents %}
+
+	<div class="jumbotron action-area">
+
+		<p>
+			Please sign in with either a registered third party account or your credentials.
+			If you do not yet have an account then you may sign up <a href="{% url 'account_signup' %}">here</a>.
+		</p>
+
+
+		<form id="login-form" method="POST" action="{% url 'account_login' %}">
+
+			{% csrf_token %}
+
+			{% if redirect_field_value %}
+				<input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+			{% endif %}
+
+			{% if form.non_field_errors %}
+				<div class="alert alert-danger">
+					{{ form.non_field_errors.0 }}
+				</div>
+			{% endif %}
+
+			<div class="form-group">
+				<label for="{{ form.login.auto_id }}">Email</label>
+				{% if form.login.errors %}
+					<div class="alert alert-danger">
+						{{ form.login.errors }}
+					</div>
+				{% endif %}
+				{{ form.login|class:'form-control' }}
+			</div>
+
+			<div class="form-group">
+				<label for="{{ form.password.auto_id }}">Password</label>
+				{% if form.password.errors %}
+					<div class="alert alert-danger">
+						{{ form.password.errors }}
+					</div>
+				{% endif %}
+				{{ form.password|class:'form-control' }}
+			</div>
+
+			<div class="social-ballot">
+
+				<div class="social-providers">
+					{% include "partials/_providers.html" with process="login" size='3x' %}
+				</div>
+
+			</div>
+
+			<div class="form-group">
+				<button type="submit" class="btn btn-default pull-right">Sign in</button>
+			</div>
+
+		</form>
+
+	</div>
+
+
+{% endblock %}

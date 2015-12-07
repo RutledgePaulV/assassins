@@ -1,0 +1,77 @@
+{% load i18n %}
+
+<div class="pane">
+
+	<div class="row">
+
+		<div id="image-container" class="col-md-7"></div>
+
+		<div class="col-md-5">
+
+			<div id="pane2">
+
+				<div class="info-section">
+					<h3>Be Searchable!</h3>
+
+					<div class="form-group">
+						<label for="title">
+							Title
+							<span class="glyphicon glyphicon-info-sign info-color" data-toggle="tooltip"
+							      title="Your title helps identify your game to other potential players.">
+							</span>
+						</label>
+						<input class="form-control" id="title" type="text" name="title"/>
+					</div>
+
+					<div class="form-group">
+						<label for="intro">
+							Intro
+							<span class="glyphicon glyphicon-info-sign info-color" data-toggle="tooltip"
+							      title="Use your intro to identify your target audience and help people find your game via search.">
+							</span>
+						</label>
+						<textarea class="form-control" rows="4" name="intro" id="intro"></textarea>
+					</div>
+
+				</div>
+
+
+				<div class="info-section">
+
+					<h3>Where's Home Base?</h3>
+
+					<div class="form-group">
+						<label for="address">Address</label>
+						<input class="form-control" id="address" type="text" name="address"/>
+					</div>
+
+					<div class="form-group">
+						<label for="city">City</label>
+						<input class="form-control" id="city" type="text" name="city"/>
+					</div>
+
+					<div class="row">
+
+						<div class="form-group col-md-6">
+							<label for="state">State</label>
+							<select class="selectpicker" id="state" name="state" data-title="Select State..." data-live-search="true" data-size="7">
+								{% for state in states %}
+									<option value="{{ state.0 }}">{{ state.1 }}</option>
+								{% endfor %}
+							</select>
+						</div>
+
+						<div class="col-md-push-1 col-md-5 form-group">
+							<label for="zip">Zip</label>
+							<input class="form-control" id="zip" type="text" name="zip"/>
+						</div>
+
+					</div>
+
+				</div>
+
+				<button id="pane2-next" class="btn-success btn-next disabled btn-lg" disabled="disabled">Next Step</button>
+			</div>
+		</div>
+	</div>
+</div>

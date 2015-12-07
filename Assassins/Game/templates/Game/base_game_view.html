@@ -1,0 +1,28 @@
+{% extends 'site.html' %}
+{% load staticfiles %}
+
+{% block page_styles %}
+
+	<link href="{% static 'style/Game/view.less' %}" type="text/less" rel="stylesheet"/>
+	{% block game-view-styles %}{% endblock %}
+
+{% endblock %}
+
+
+{% block main-contents %}
+
+	{% block game-top-insert %}{% endblock %}
+
+	<div class="row game-contents">
+
+		<div id="game-menu" class="col-md-2 affix-top">
+			{% include 'Game/partials/game_nav.html' %}
+		</div>
+
+		<div id="content-section" class="col-md-8">
+			{% block game-content-section %}{% endblock %}
+		</div>
+
+	</div>
+
+{% endblock %}

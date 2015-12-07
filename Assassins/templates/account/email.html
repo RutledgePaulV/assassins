@@ -1,0 +1,48 @@
+{% extends "site.html" %}
+{% load global_tags %}
+{% load staticfiles %}
+{% load account %}
+
+{% block page_styles %}
+	<link href="{% static 'style/Member/login.less' %}" rel="stylesheet" type="text/less"/>
+{% endblock %}
+
+{% block main-contents %}
+
+	<div class="jumbotron action-area">
+		{% if user.emailaddress_set.all %}
+			<p>The following e-mail addresses are associated with your account</p>
+
+			<form action="{% url 'account_email' %}" class="email_list" method="post">
+				{% csrf_token %}
+				{% for emailaddress in user.emailaddress_set.all %}
+					{% with "email_radio_"|add:forloop.counter as id %}
+						<label for="{{ id }}">
+							<input id="{{ id }}"
+							       type="radio"
+							       name="email"
+							       {% if emailaddress.primary %}checked="checked"{% endif %}
+							       value="{{ emailaddress.email }}"/>
+							{{ emailaddress.email }}
+							{% if emailaddress.verified %}
+								(verified)
+							{% else %}
+								(unverified)
+							{% endif %}
+						</label>
+					{% endwith %}
+
+				{% endfor %}
+
+				<div class="form-group">
+					<button class="btn btn-default" type="submit" name="action_primary">Make Primary</button>
+					<button class="btn btn-default" type="submit" name="action_send">Resend Verification</button>
+					<button class="btn btn-default" type="submit" name="action_remove">Remove</button>
+				</div>
+
+			</form>
+		{% endif %}
+	</div>
+
+{% endblock %}
+

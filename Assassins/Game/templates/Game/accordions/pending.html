@@ -1,0 +1,16 @@
+{% for assignment in pending %}
+
+	{% if forloop.counter0 > 0 %}
+		<hr/>
+	{% endif %}
+
+	<div class="row">
+
+		{% if assignment.killer_verdict == True %}
+			<a href="{{ assignment.killer.link }}">{{ assignment.killer.get_full_name }}</a>
+			reports that the assignment is complete.
+		{% endif %}
+
+	</div>
+
+{% endfor %}

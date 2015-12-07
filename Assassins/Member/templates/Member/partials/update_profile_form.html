@@ -1,0 +1,65 @@
+{% load staticfiles %}
+{% with user.profile as profile %}
+	<fieldset id="profile-form">
+
+		<div class="row">
+			<div class="col-md-7">
+				<div class="form-group">
+					<label for="phone">Phone</label>
+					{% if profile.phone %}
+						<input class="form-control" id="phone" name="phone" type="text" value="{{ profile.phone }}"/>
+					{% else %}
+						<input class="form-control" id="phone" name="phone" type="text" placeholder="xxx-xxx-xxxx"/>
+					{% endif %}
+				</div>
+
+				<div class="form-group">
+					<label for="slogan">Slogan</label>
+					{% if profile.slogan %}
+						<input class="form-control" id="slogan" name="slogan" type="text" value="{{ profile.slogan }}"/>
+					{% else %}
+						<input class="form-control" id="slogan" name="slogan" type="text"
+						       placeholder="Asta lavista baby"/>
+					{% endif %}
+				</div>
+
+				<div class="form-group">
+					<label for="biography">Bio</label>
+					<textarea class="form-control" id="biography"
+					          name="biography">{% firstof profile.biography 'Your bio here...' %}</textarea>
+				</div>
+
+				<div class="form-group">
+					<label>Contact Preferences</label>
+
+					<div class="form-inline">
+						<span>Email</span>
+						<input id="email-preference" name="email-preference" type="checkbox"
+						       {% if user.profile.should_email %}checked{% endif %}/>
+						<span>&nbsp;</span>
+						<span>Phone</span>
+						<input id="phone-preference" name="phone-preference" type="checkbox"
+						       {% if user.profile.should_text %}checked{% endif %}/>
+					</div>
+				</div>
+
+			</div>
+
+			<div class="col-md-5">
+
+				<label for="image">Avatar</label>
+
+				<div class="form-group">
+					<input class="form-control hidden" id="image" name="image" type="file"
+					       data-default="{% static 'images/empty_silhouette.jpg' %}"
+					       {% if profile.image %}data-image="{{ profile.image.url }}{% endif %}">
+				</div>
+
+			</div>
+		</div>
+
+		<button id="submit-profile" type="submit" class="btn-primary">Update</button>
+
+	</fieldset>
+
+{% endwith %}

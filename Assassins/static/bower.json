@@ -1,0 +1,43 @@
+{
+  "name": "AssassinsFrontEnd",
+  "version": "0.0.0",
+  "homepage": "https://github.com/RutledgePaulV/Assassins",
+  "authors": [
+    "paul.rutledge <paul.v.rutledge@gmail.com>"
+  ],
+  "description": "Managing the front end requirements using bower.",
+  "keywords": [
+    "assassins",
+    "jquery",
+    "handlebars"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "eonasdan-bootstrap-datetimepicker": "latest",
+    "jquery.cookie": "latest",
+    "bootstrap": "latest",
+    "jquery": "latest",
+    "bootstrapvalidator": "latest",
+    "imagesloaded": "latest",
+    "nested": "latest",
+    "less": "latest",
+    "bootstrap-select": "latest",
+    "requirejs": "latest",
+    "lodash": "latest",
+    "require-handlebars-plugin": "latest",
+    "requirejs-domready": "latest",
+    "components-font-awesome": "latest",
+    "slick-carousel": "latest",
+    "lunr.js": "latest",
+    "jquery-knob": "latest",
+    "formatter": "latest"
+  }
+}

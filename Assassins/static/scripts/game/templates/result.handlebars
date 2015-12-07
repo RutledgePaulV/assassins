@@ -1,0 +1,19 @@
+<li>
+	<a class="result-link" href="{{url}}">
+		<div class="result-row">
+			<h4 class="result-header">
+				{{{title}}} - {{{city}}}, {{{state}}}
+				{{~#if player}}
+					<span class="glyphicon glyphicon-flag"></span>
+				{{~/if}}
+				{{~#if host}}
+					<span class="glyphicon glyphicon-flash"></span>
+				{{~/if}}
+			</h4>
+
+			<div class="result-intro">
+				<p>{{{intro}}}</p>
+			</div>
+		</div>
+	</a>
+</li>

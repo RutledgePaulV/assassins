@@ -1,0 +1,44 @@
+{% extends 'site.html' %}
+{% load staticfiles %}
+{% load global_tags %}
+{% load require %}
+
+{% block page_styles %}
+	<link href="{% static 'style/Member/register.less' %}" type="text/less" rel="stylesheet"/>
+{% endblock %}
+
+{% block inline_scripts %}
+	{% require_module 'scripts/member/register/main' %}
+{% endblock %}
+
+{% block main-contents %}
+
+	<div class="jumbotron">
+		<div class="container">
+			{% if user.is_authenticated %}
+				<div class="action-header">
+					<h2>Silly Goose! You're already logged in.</h2>
+
+					<p>View your profile <a href="{% url 'users:profile' %}">here.</a></p>
+				</div>
+			{% else %}
+
+				<div class="row">
+
+					<div class="col-md-3">
+						<h3 class="action-header">Hate forms? Me too.</h3>
+						<div class="media-links">{% include 'partials/_providers.html' with size='4x' %}</div>
+					</div>
+
+					<div class="col-md-7 col-md-push-2">
+						<h3 class="action-header">Old fashioned?</h3>
+						{% include 'partials/_signup_form.html' %}
+					</div>
+
+				</div>
+
+			{% endif %}
+		</div>
+	</div>
+
+{% endblock %}

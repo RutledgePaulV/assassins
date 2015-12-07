@@ -1,0 +1,41 @@
+{% for assignment in review %}
+
+	{% if forloop.counter0 > 0 %}
+		<hr/>
+	{% endif %}
+
+	<div class="row assignment-for-review">
+
+		<div>
+			<h4>
+				<a href="{{ assignment.killer.link }}">{{ assignment.killer.get_full_name }}</a> was commissioned to
+				kill <a href="{{ assignment.killee.link }}">{{ assignment.killee.get_full_name }}</a>
+			</h4>
+			<ul>
+				<li>
+					The assassin reports assignment {% if assignment.killer_verdict %}complete{% else %}
+					incomplete{% endif %}
+				</li>
+				<li>
+					The target reports that the assassin {% if assignment.killee_verdict %}succeeded{% else %}
+					failed{% endif %}
+				</li>
+			</ul>
+		</div>
+
+		<div class="btn-group btn-group-justified">
+			<div class="btn-group">
+				<button class="btn btn-success" name="success" data-assignment="{{ assignment.pk }}" value="success">
+					Mission Successful
+				</button>
+			</div>
+			<div class="btn-group">
+				<button class="btn btn-danger" name="failure" data-assignment="{{ assignment.pk }}" value="failure">
+					Mission Failed
+				</button>
+			</div>
+		</div>
+
+	</div>
+
+{% endfor %}

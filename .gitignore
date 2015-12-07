@@ -1,0 +1,10 @@
+/.idea
+whoosh/
+bower_components
+*.pyc
+*.sqlite3
+serve_media
+serve_static
+pubring.gpg~
+secring.gpg
+credentials.py

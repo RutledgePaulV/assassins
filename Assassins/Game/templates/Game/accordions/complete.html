@@ -1,0 +1,68 @@
+{% if complete|length > 0 %}
+
+	<div id="complete-tab" class="tab-nav">
+		<ul class="nav nav-pills">
+			<li role="presentation" class="active">
+				<a href="#success-tab" aria-controls="rules" role="tab" data-toggle="tab">Success</a>
+			</li>
+			<li role="presentation">
+				<a href="#failed-tab" aria-controls="settings" role="tab" data-toggle="tab">Failed</a>
+			</li>
+		</ul>
+	</div>
+
+	<div id="success-tab">
+
+		{% for assignment in complete %}
+
+			{% if assignment.success %}
+				{% if not forloop.first %}
+					<hr/>
+				{% endif %}
+
+				<div class="row">
+					<a href="{{ assignment.killer.link }}">
+						{{ assignment.killer.get_full_name }}
+					</a>
+					annihilated
+					<a href="{{ assignment.killee.link }}">
+						{{ assignment.killee.get_full_name }}
+					</a>.
+				</div>
+			{% endif %}
+
+		{% endfor %}
+
+	</div>
+
+	<div id="failed-tab">
+
+		{% for assignment in complete %}
+
+			{% if assignment.failed %}
+				{% if not forloop.first %}
+					<hr/>
+				{% endif %}
+
+				<div class="row">
+					<a href="{{ assignment.killer.link }}">
+						{{ assignment.killer.get_full_name }}
+					</a>
+					failed to take out
+
+					<a href="{{ assignment.killee.link }}">
+						{{ assignment.killee.get_full_name }}
+					</a>.
+				</div>
+			{% endif %}
+
+		{% endfor %}
+
+	</div>
+
+
+{% else %}
+
+	<p>No Results</p>
+
+{% endif %}

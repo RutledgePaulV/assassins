@@ -1,0 +1,21 @@
+{% extends 'site.html' %}
+{% load membertags %}
+
+
+{% block main-contents %}
+
+	{% if other_user|is_coparticipant:user %}
+
+		<div class="user-profile">
+
+			<h3>{{ other_user.get_full_name }}</h3>
+
+		</div>
+
+	{% else %}
+
+		<p>Sorry, you don't have permission to view this user's profile.</p>
+
+	{% endif %}
+
+{% endblock %}

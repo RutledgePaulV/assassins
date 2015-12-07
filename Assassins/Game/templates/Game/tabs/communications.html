@@ -1,0 +1,36 @@
+<div>
+
+	<section class="link-section">
+		<h4>Join Link</h4>
+
+		<div>
+			<input id="join-link" type="text" readonly="readonly" class="form-control bg-primary text-center" value="{{ join_url }}"/>
+		</div>
+
+		<div class="fb-share-button pull-right" data-href="{{ join_url }}" data-layout="icon_link"></div>
+	</section>
+
+	<section class="notification-section">
+		<h4>Post Notification</h4>
+
+		<div class="form-group">
+			<div class="row">
+				<div class="col-md-8">
+					<input id="subject" class="form-control" name="subject" type="text" placeholder="Subject..."/>
+				</div>
+				<div class="pull-right post-locations">
+					<span class="location-email-label">Send Email</span>
+					<input id="send-email" class="checkbox-inline" type="checkbox"/>
+					<span class="location-text-label">Send Text</span>
+					<input id="send-text" class="checkbox-inline" type="checkbox"/>
+				</div>
+			</div>
+			<textarea id="notification" class="form-control" placeholder="Contents..." rows="8"></textarea>
+		</div>
+
+		<button id="post-notification" class="btn-primary pull-right">Send Notification</button>
+
+	</section>
+
+
+</div>

@@ -1,0 +1,83 @@
+<div>
+	<div class="controls panel panel-default">
+		<div class="panel-heading"><h4>Game Controls</h4></div>
+		<ul class="list-group">
+			<li class="list-group-item">
+				<div class="row">
+					<div class="col-md-8">
+						<strong>Delete this game</strong>
+
+						<p>
+							<small>Deleting this game is irreversible and affects all participants!</small>
+						</p>
+					</div>
+					<div class="col-md-4 text-right">
+						<button id="delete-game" class="btn btn-danger">Delete</button>
+					</div>
+				</div>
+			</li>
+			<li class="list-group-item">
+				<div class="row">
+					<div class="col-md-8">
+						<strong>Open / Close Registration Link</strong>
+
+						<p>
+							<small>By closing registration any distributed join links will cease to work.</small>
+						</p>
+					</div>
+					<div class="col-md-4 text-right">
+						<button id="open-registration" class="btn btn-success"
+						        {% if game.open %}disabled{% endif %}>Open
+						</button>
+						<button id="close-registration" class="btn btn-danger"
+						        {% if not game.open %}disabled{% endif %}>Close
+						</button>
+					</div>
+				</div>
+			</li>
+			<li class="list-group-item">
+				<div class="row">
+					<div class="col-md-8">
+						<strong>Manage Players</strong>
+
+						<p>
+							<small>As a host you have the ability to remove players.</small>
+						</p>
+					</div>
+					<div class="col-md-4 text-right">
+						<button id="manage-players" class="btn btn-default">Manage Players</button>
+					</div>
+				</div>
+			</li>
+			<li class="list-group-item">
+				<div class="row">
+					<div class="col-md-8">
+						<strong>Manage Reviewers</strong>
+
+						<p>
+							<small>You can add additional reviewers to help manage the game.</small>
+						</p>
+					</div>
+					<div class="col-md-4 text-right">
+						<button id="manage-reviewers" class="btn btn-default">Manage Reviewers</button>
+					</div>
+				</div>
+			</li>
+			<li class="list-group-item">
+				<div class="row">
+					<div class="col-md-8">
+						<strong>Subscription</strong>
+
+						<p>
+							<small>If you want to allow more players to register you can update your subscription.
+							</small>
+						</p>
+					</div>
+					<div class="col-md-4 text-right">
+						<button id="manage-subscription" class="btn btn-default">Manage Subscription</button>
+					</div>
+				</div>
+			</li>
+		</ul>
+	</div>
+</div>

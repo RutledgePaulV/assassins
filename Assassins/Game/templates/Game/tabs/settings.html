@@ -1,0 +1,13 @@
+<div class="form-group">
+
+	<label for="start_date">Start Date</label>
+	<div class='input-group date'>
+		<span class="input-group-addon">
+			<span class="glyphicon glyphicon-calendar"></span>
+		</span>
+
+		<input id="original_start_date" type="hidden" value="{{ game.start_date|date:'c' }}"/>
+		<input id="start_date" type='text' name="start_date" class="form-control"/>
+	</div>
+
+</div>

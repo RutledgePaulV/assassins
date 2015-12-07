@@ -1,0 +1,13 @@
+{% for assignment in incomplete %}
+
+	{% if forloop.counter0 > 0 %}
+		<hr/>
+	{% endif %}
+
+	<div class="row">
+		<a href="{{ assignment.killer.link }}">{{ assignment.killer.get_full_name }}</a>
+		still needs to destroy
+		<a href="{{ assignment.killee.link }}">{{ assignment.killee.get_full_name }}</a>
+	</div>
+
+{% endfor %}

@@ -1,0 +1,58 @@
+{% extends 'Game/base_game_view.html' %}
+{% load staticfiles %}
+{% load gametags %}
+{% load require %}
+
+
+{% block game-view-styles %}
+	<link href="{% static 'scripts/lib/redactor/redactor.css' %}" rel="stylesheet" type="text/css"/>
+	<link href="{% static 'eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css' %}"
+	      type="text/css" rel="stylesheet"/>
+	<link href="{% static 'style/Game/management.less' %}" rel="stylesheet" type="text/less"/>
+{% endblock %}
+
+{% block inline_scripts %}
+	{% require_module 'scripts/game/management/main' %}
+{% endblock %}
+
+{% block game-content-section %}
+
+	<div class="admin-content">
+		<div id="tab-menu" class="tab-nav">
+			<ul class="nav nav-pills">
+				<li role="presentation" class="active">
+					<a href="#status-tab" aria-controls="status" role="tab" data-toggle="tab">
+						Status
+						{% if review|length > 0 %}<span class="badge">{{ review|length }}</span>{% endif %}
+					</a>
+				</li>
+				<li role="presentation">
+					<a href="#rules-tab" aria-controls="rules" role="tab" data-toggle="tab">Rules</a>
+				</li>
+				<li role="presentation">
+					<a href="#communications-tab" aria-controls="communications" role="tab" data-toggle="tab">Communications</a>
+				</li>
+				{% if game|is_owner:user %}
+					<li role="presentation">
+						<a href="#settings-tab" aria-controls="settings" role="tab" data-toggle="tab">Settings</a>
+					</li>
+					<li role="presentation">
+						<a href="#control-tab" aria-controls="control" role="tab" data-toggle="tab">Controls</a>
+					</li>
+				{% endif %}
+			</ul>
+		</div>
+
+		<div class="tab-content">
+			<div id="status-tab" class="tab-pane active">{% include 'Game/tabs/status.html' %}</div>
+			<div id="rules-tab" class="tab-pane">{% include 'Game/tabs/rules.html' %}</div>
+			<div id="communications-tab" class="tab-pane">{% include 'Game/tabs/communications.html' %}</div>
+			{% if game|is_owner:user %}
+				<div id="settings-tab" class="tab-pane">{% include 'Game/tabs/settings.html' %}</div>
+				<div id="control-tab" class="tab-pane">{% include 'Game/tabs/control.html' %}</div>
+			{% endif %}
+		</div>
+	</div>
+
+
+{% endblock %}

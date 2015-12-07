@@ -1,0 +1,35 @@
+{% load global_tags %}
+{% load socialaccount %}
+
+
+{# We want to keep them on the same page, unless they're on the logout page in which case we route them to index #}
+{% capture next_url %}
+	{% spaceless %}
+		{% with full_path=request.get_full_path %}
+			{% url 'users:logout' as logout_url %}
+			{% if full_path == logout_url %}
+				{% url 'site:index' %}
+			{% else %}
+				{{ full_path }}
+			{% endif %}
+		{% endwith %}
+	{% endspaceless %}
+{% endcapture %}
+
+<form action="{% url 'account_login' %}?next={{ next_url }}" method="post" class="form" id="formLogin">
+	{% csrf_token %}
+	<input id="username" type="text" name="login" size="30" placeholder="Email"/>
+	<input id="password" type="password" name="password" size="30" placeholder="Password"/>
+	<input id="login" class="btn btn-default" type="submit" name="commit" value="Sign In"/>
+</form>
+
+<div class="row">
+	<div class="col-md-6 text-left" style="padding-top:6px">
+		{% include 'partials/_providers.html' with process="login" size='lg' %}
+	</div>
+	<div class="col-m-6 text-right">
+		<p>
+			<a href="{% url 'account_reset_password' %}">Having Trouble?</a>
+		</p>
+	</div>
+</div>

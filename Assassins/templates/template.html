@@ -1,0 +1,98 @@
+{% extends 'config.html' %}
+{% load staticfiles %}
+{% load global_tags %}
+{% load socialaccount %}
+{% load commands %}
+{% load compress %}
+
+{% block config_open_graph %}
+	{% include 'partials/_og.html' %}
+{% endblock %}
+
+{% block config_less_js %}
+	<script type="text/javascript" src="{% static 'less/dist/less.js' %}"></script>
+{% endblock %}
+
+{% block inline_global_scripts_before %}
+
+	{% capture member %}
+		{% if user.is_authenticated %}{{ user.dictify|safe }}{% else %}null{% endif %}
+	{% endcapture %}
+
+	{% capture primary_key %}
+		{% if game %}{{ game.pk|safe }}{% else %}null{% endif %}
+	{% endcapture %}
+
+	<script id="page-context">
+		var __available__ = {% commands %};
+		var __context__ = {user: {{ member }}, game: {{ primary_key }}, token: {{HEAP_TOKEN}} };
+	</script>
+
+{% endblock %}
+
+{% block inline_global_scripts %}
+
+	<script>
+		$.ajaxSetup({
+			crossDomain: false, beforeSend: function (xhr, settings) {
+				if (!/^(GET|HEAD|OPTIONS|TRACE)$/.test(settings.type)) {
+					xhr.setRequestHeader("X-CSRFToken", $.cookie('csrftoken'));
+				}
+			}
+		});
+	</script>
+
+	{% capture the_inlined_scripts %}
+		{% block inline_scripts %}{% endblock %}
+	{% endcapture %}
+
+	{% compress js %}
+		{% if REQUIRE_DEBUG %}
+			<script src="{% static 'requirejs/require.js' %}"></script>
+			<script src="{% static 'scripts/config/require.js' %}"></script>
+			{{ the_inlined_scripts }}
+		{% else %}
+			{{ the_inlined_scripts }}
+		{% endif %}
+	{% endcompress %}
+
+{% endblock %}
+
+{% block config_all_styles %}
+	{% include 'partials/_styles.html' %}
+	{% block page_styles %}{% endblock %}
+{% endblock %}
+
+{% block config_all_scripts %}
+	{% include 'partials/_scripts.html' %}
+	{% block page_scripts %}{% endblock %}
+{% endblock %}
+
+{% block config_hidden_includes %}
+	{% block hidden_includes %}{% endblock %}
+{% endblock %}
+
+{% block body-class %}body{% endblock %}
+
+{% block config_content %}
+
+	{% block body %}
+
+		<div class="content-wrap">
+
+			<header class="navbar navbar-default navbar-fixed-top header">
+				{% block header-contents %}{% endblock %}
+			</header>
+
+			<main class="main">
+				{% block main-contents %}{% endblock %}
+			</main>
+
+		</div>
+
+		<footer class="footer">
+			{% block footer-contents %}{% endblock %}
+		</footer>
+
+	{% endblock %}
+{% endblock %}

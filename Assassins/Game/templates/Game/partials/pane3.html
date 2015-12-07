@@ -1,0 +1,41 @@
+{% load i18n %}
+
+<div class="pane" data-order="3">
+
+	<div class="jumbotron">
+		<div class="container">
+			<h3>Configuration</h3>
+
+			<p>
+				In order to get your game all set up, we need some logistical information. If you think
+				some things might change, don't worry - you can always go back and edit settings until
+				the game actually starts.
+			</p>
+
+			<hr/>
+		</div>
+
+
+		<div id="config-form" class="container config-section">
+
+			<div class="form-group">
+				<label for="start_date">When should the game officially start?</label>
+
+				<div class='input-group date'>
+								<span class="input-group-addon"><span
+										class="glyphicon glyphicon-calendar"></span></span>
+					<input id="start_date" type='text' name="start_date" class="form-control"/>
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label for="max_players">Maximum number of players we should allow?</label>
+				<input id="max_players" class="form-control" type="text" name="max_players" placeholder="50"/>
+			</div>
+
+
+			<button id="pane3-next" class="btn-success btn-next btn-lg">Next Step</button>
+		</div>
+
+	</div>
+</div>

@@ -1,0 +1,12 @@
+{% extends 'error.html' %}
+{% load staticfiles %}
+
+{% block error_message %}
+	Looks like you found a dead link!
+{% endblock %}
+
+
+{% block body %}
+	<br/><br/><br/>
+	<div class="dead-link"></div>
+{% endblock %}

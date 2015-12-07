@@ -1,0 +1,50 @@
+{% extends 'site.html' %}
+{% load staticfiles %}
+{% load global_tags %}
+{% load require %}
+
+{% block page_styles %}
+	<link href="{% static 'style/Member/profile.less' %}" type="text/less" rel="stylesheet"/>
+{% endblock %}
+
+{% block page_scripts %}
+
+{% endblock %}
+
+{% block inline_scripts %}
+	{% require_module 'scripts/member/profile/main' %}
+{% endblock %}
+
+{% block main-contents %}
+	<div class="container">
+
+		<div class="profile-section">
+			<h3>Profile</h3>
+			{% include 'Member/partials/update_profile_form.html' %}
+		</div>
+
+
+		<div class="account-section row">
+
+			<div class="col-md-5">
+				<h3>Account</h3>
+
+				<div class="account-details">
+					{% include 'Member/partials/update_account_form.html' %}
+				</div>
+			</div>
+
+
+			<div class="col-md-push-2 col-md-5">
+				<h3>Credentials</h3>
+
+				<div class="account-password">
+					{% include 'Member/partials/update_password_form.html' %}
+				</div>
+			</div>
+
+		</div>
+
+
+	</div>
+{% endblock %}

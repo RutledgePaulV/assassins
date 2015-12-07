@@ -1,0 +1,37 @@
+{% extends "site.html" %}
+{% load global_tags %}
+{% load staticfiles %}
+{% load account %}
+
+{% block page_styles %}
+	<link href="{% static 'style/Member/login.less' %}" rel="stylesheet" type="text/less"/>
+{% endblock %}
+
+{% block main-contents %}
+
+	<div class="jumbotron action-area">
+
+		<p>
+			You are about to use your {{ account.get_provider.name }} account to
+			login to {{ site.name }}. Please fill out the additional information below:
+		</p>
+
+		<form class="signup" id="signup_form" method="post" action="{% url 'socialaccount_signup' %}">
+			{% csrf_token %}
+			<label for="{{ form.email.auto_id }}">Email</label>
+			{% if form.errors %}
+				<div class="alert alert-danger">
+					{{ form.errors.email }}
+				</div>
+			{% endif %}
+			{{ form.email|class:'form-control' }}
+			{% if redirect_field_value %}
+				<input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+			{% endif %}
+			<button class="btn btn-primary" type="submit">Sign Up</button>
+		</form>
+
+	</div>
+
+
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends "site.html" %}
+{% load global_tags %}
+{% load staticfiles %}
+{% load account %}
+
+{% block page_styles %}
+	<link href="{% static 'style/Member/login.less' %}" rel="stylesheet" type="text/less"/>
+{% endblock %}
+
+{% block main-contents %}
+
+	<div class="jumbotron action-area">
+
+		<h3>Email successfully confirmed!</h3>
+
+		{% user_display confirmation.email_address.user as user_display %}
+
+		<p>
+			{% with confirmation.email_address.email as email %}
+				You have confirmed that <a href="mailto:{{ email }}">{{ email }}</a>
+				is an e-mail address for user {{ user_display }}.
+			{% endwith %}
+		</p>
+
+	</div>
+
+{% endblock %}

@@ -1,0 +1,44 @@
+{% load global_tags %}
+
+<form id="registration-form" method="POST">
+
+	{% csrf_token %}
+
+	<div class="row">
+		<div class="col-md-5">
+
+			<div class="form-group">
+				<label for="{{ form.first_name.auto_id }}">First Name</label>
+				{{ form.first_name|class:'form-control' }}
+			</div>
+
+			<div class="form-group">
+				<label for="{{ form.last_name.auto_id }}">Last Name</label>
+				{{ form.last_name|class:'form-control' }}
+			</div>
+
+			<div class="form-group">
+				<label for="{{ form.email.auto_id }}">Email</label>
+				{{ form.email|class:'form-control' }}
+			</div>
+
+		</div>
+
+		<div class="col-md-push-2 col-md-5">
+
+			<div class="form-group">
+				<label for="{{ form.password1.auto_id }}">Password</label>
+				{{ form.password1|class:'form-control' }}
+			</div>
+
+			<div class="form-group">
+				<label for="{{ form.password2.auto_id }}">Password (again)</label>
+				{{ form.password2|class:'form-control' }}
+			</div>
+
+			<button class="btn-primary" type="submit">Sign me up!</button>
+		</div>
+
+	</div>
+
+</form>

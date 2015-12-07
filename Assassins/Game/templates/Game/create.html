@@ -1,0 +1,42 @@
+{% extends 'site.html' %}
+{% load staticfiles %}
+{% load require %}
+
+{% block page_styles %}
+	<link rel="stylesheet" type="text/css" href="{% static 'eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css' %}"/>
+	<link href="{% static 'style/Game/create.less' %}" type="text/less" rel="stylesheet"/>
+{% endblock page_styles %}
+
+{% block inline_scripts %}
+	{% require_module 'scripts/game/create/main' %}
+{% endblock %}
+
+{% block main-contents %}
+
+
+	<div id="carousel" class="carousel carousel-fade" data-keyboard="false">
+
+		<div id="wizard" class="carousel-inner container">
+			<div class="item active">
+				{% include 'Game/partials/pane1.html' %}
+			</div>
+			<div class="item">
+				{% include 'Game/partials/pane2.html' %}
+			</div>
+			<div class="item">
+				{% include 'Game/partials/pane3.html' %}
+			</div>
+			<div class="item">
+				{% include 'Game/partials/pane4.html' %}
+			</div>
+		</div>
+
+	</div>
+
+{% endblock %}
+
+{# we can't define this in the panel itself, because it must be inside a template that extends base #}
+{% block offscreen %}
+	{{ offscreen }}
+{% endblock %}
+

@@ -1,0 +1,84 @@
+
+{% if game.progress %}
+	<h3>Progress</h3>
+	<div class="progress">
+		<div class="progress-bar" style="width: {{ game.progress }}%;">{{ game.progress }}%</div>
+	</div>
+{% endif %}
+
+<h3>Assignments</h3>
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+
+	<div id="review" class="panel panel-default">
+		<div class="panel-heading">
+			<h4 class="panel-title">
+				<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+					Needing review <span class="count badge">{{ review|length }}</span>
+				</a>
+			</h4>
+		</div>
+		<div id="collapseOne" class="panel-collapse collapse in">
+			{% if review|length > 0 %}
+				<div class="panel-body results">
+					{% include 'Game/accordions/review.html' %}
+				</div>
+			{% endif %}
+		</div>
+	</div>
+
+
+	<div id="pending" class="panel panel-default">
+		<div class="panel-heading">
+			<h4 class="panel-title">
+				<a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+					Pending <span class="count badge">{{ pending|length }}</span>
+				</a>
+			</h4>
+		</div>
+		<div id="collapseTwo" class="panel-collapse collapse in">
+			{% if pending|length > 0 %}
+				<div class="panel-body results">
+					{% include 'Game/accordions/pending.html' %}
+				</div>
+			{% endif %}
+		</div>
+	</div>
+
+
+	<div id="incomplete" class="panel panel-default">
+		<div class="panel-heading">
+			<h4 class="panel-title">
+				<a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+					Incomplete <span class="count badge">{{ incomplete|length }}</span>
+				</a>
+			</h4>
+		</div>
+		<div id="collapseThree" class="panel-collapse collapse in">
+			{% if incomplete|length > 0 %}
+				<div class="panel-body results">
+					{% include 'Game/accordions/incomplete.html' %}
+				</div>
+			{% endif %}
+		</div>
+	</div>
+
+
+	<div id="complete" class="panel panel-default">
+		<div class="panel-heading">
+			<h4 class="panel-title">
+				<a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
+					Complete <span class="count badge">{{ complete|length }}</span>
+				</a>
+			</h4>
+		</div>
+		<div id="collapseFour" class="panel-collapse collapse in">
+			{% if complete|length > 0 %}
+				<div class="panel-body results">
+					{% include 'Game/accordions/complete.html' %}
+				</div>
+			{% endif %}
+		</div>
+	</div>
+
+
+</div>

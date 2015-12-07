@@ -1,0 +1,67 @@
+{% load global_tags %}
+
+<div class="pane" data-order="4">
+
+	<div class="jumbotron">
+		<div class="container">
+
+			<h3>Pick your poison!</h3>
+
+			<p>
+				Assassins has quite a few rules to keep the trolls at bay, so we've compiled
+				some of the most popular variations. Pick one out to act as your base template,
+				and if you want to make changes to the rules for your specific game later, you
+				can do that via the game's administration page.
+			</p>
+
+
+			{% for rule_set in rule_sets %}
+
+				{# for the opening tag we use the zero based counter #}
+				{% if forloop.first or forloop.counter0|divisibleby:3 %}<div class="row">{% endif %}
+
+				<div class="col-md-4">
+					<div class="rule-badge">
+						<div class="{{ rule_set.icon_class }} center-block"></div>
+						<button type="button"
+						        class="btn btn-primary"
+						        data-target="#rule_set_{{ rule_set.pk }}">
+							{{ rule_set.name }}
+						</button>
+					</div>
+				</div>
+
+				{# for the closing tag we use the 1 based counter #}
+				{% if forloop.last or forloop.counter|divisibleby:3 %}</div>{% endif %}
+
+			{% endfor %}
+
+		</div>
+	</div>
+
+</div>
+
+
+{# The actual contents of the modals should be loaded into the top level body off screen to avoid styling scope issues #}
+{% capture offscreen %}
+	{% for set_of_rules in rule_sets %}
+		<div id="rule_set_{{ set_of_rules.pk }}" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">{{ set_of_rules.name }}</h4>
+					</div>
+					<div class="modal-body">
+						{{ set_of_rules.html|safe }}
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn-default" data-dismiss="modal">Pass</button>
+						<button type="button" class="btn-success"
+						        data-pk="{{ set_of_rules.pk }}"
+						        data-dismiss="modal">Use This One</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	{% endfor %}
+{% endcapture %}

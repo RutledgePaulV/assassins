@@ -1,0 +1,28 @@
+{% extends 'site.html' %}
+{% load global_tags %}
+{% load staticfiles %}
+
+{% block page_styles %}
+	<link href="{% static 'style/Member/reset_form.less' %}" type="text/less" rel="stylesheet"/>
+{% endblock %}
+
+{% block main-contents %}
+
+	<div class="jumbotron action-area">
+		<h3>Email verification required!</h3>
+
+		{% url 'account_email' as email_url %}
+
+		<p>
+			This part of the site requires us to verify that
+			you are who you claim to be. For this purpose, we require that you
+			verify ownership of your e-mail address.
+		</p>
+
+		<p>
+			<strong>Note:</strong> you can still <a href="{{ email_url }}">change your e-mail address</a>.
+		</p>
+
+	</div>
+
+{% endblock %}

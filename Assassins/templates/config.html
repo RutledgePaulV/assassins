@@ -1,0 +1,67 @@
+{% extends 'assassins_base.html' %}
+{% load global_tags %}
+{% load staticfiles %}
+{% load compress %}
+
+{# Defining meta data blocks for overriding #}
+{% block base_meta_data %}
+	<meta charset="UTF-8"/>
+	<meta content="text/html" http-equiv="content-type"/>
+	<meta content="{% block author %}{% endblock %}" name="author"/>
+	<meta content="{% block keywords %}{% endblock %}" name="keywords"/>
+	<meta content="{% block description %}{% endblock %}" name="description"/>
+	{% block config_open_graph %}{% endblock %}
+	<title>{% block meta_title %}{% endblock %}</title>
+	<link rel="icon" type="image/png" href="{% static 'images/favicon.png' %}"/>
+{% endblock %}
+
+
+{# Specifying behavior for loaded stylesheets based on if in debug mode or not. #}
+{% block base_stylesheets %}
+
+	{# Defining a capture for stylesheets so that we can optionally place them in a compress tag. #}
+	{% capture styles %}
+		{% block config_all_styles %}{% endblock %}
+	{% endcapture %}
+
+	{% if compress %}
+		{% compress css %}{{ styles }}{% endcompress %}
+	{% else %}
+		{{ styles }}
+	{% endif %}
+
+{% endblock %}
+
+
+{# Specifying behavior for loading scripts based on if in debug mode or not. #}
+{% block base_head_scripts %}
+
+	{# Defining a capture for scripts so that we can optionally place them in a compress tag. #}
+	{% capture scripts %}
+		{% block config_all_scripts %}{% endblock %}
+	{% endcapture %}
+
+    {% block inline_global_scripts_before %}{% endblock %}
+
+	{% if not compress %}
+		{% block config_less_js %}{% endblock %}
+	{% endif %}
+
+	{{ scripts }}
+
+	{% block inline_global_scripts %}{% endblock %}
+
+{% endblock %}
+
+
+{# Including the CSRF token on every page so it can be used in all ajax calls. #}
+{% block base_hidden_includes %}
+	{% csrf_token %}
+	{% block config_hidden_includes %}{% endblock %}
+{% endblock %}
+
+
+{# Pretty print the contents inside the body. #}
+{% block base_body_content %}
+	{% block config_content %}{% endblock %}
+{% endblock %}

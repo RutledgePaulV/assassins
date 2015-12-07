@@ -1,0 +1,70 @@
+{% extends 'site.html' %}
+{% load staticfiles %}
+{% load require %}
+
+{% block inline_scripts %}
+	{% require_module 'scripts/member/assignments/main' %}
+{% endblock %}
+
+{% block page_styles %}
+	<link href="{% static 'slick-carousel/slick/slick.css' %}" rel="stylesheet" type="text/css"/>
+	<link href="{% static 'style/themes/slick-theme.less' %}" rel="stylesheet" type="text/less"/>
+	<link href="{% static 'style/Member/assignments.less' %}" rel="stylesheet" type="text/less"/>
+{% endblock %}
+
+
+{% block main-contents %}
+
+	{% for game in games %}
+
+		<div class="game-assignments">
+
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">
+						<a href="{{ game.assignments.0.game.url }}">
+							{{ game.assignments.0.game.title }}
+						</a>
+					</h3>
+				</div>
+				<div class="panel-body">
+					<div class="rotator game-assignments">
+
+						{% for assignment in game.assignments %}
+
+							<div class="bio">
+								<div class="thumbnail">
+									<a href="{{ assignment.killee.link }}">
+										<img src="{{ assignment.killee.profile.image_url }}"/>
+									</a>
+									<div class="caption">
+										<div class="row">
+											<div class="col-md-6">
+												<h5>Name</h5>
+												<p>{{ assignment.killee.get_full_name }}</p>
+											</div>
+											<div class="col-md-6">
+												<h5>Date Assigned</h5>
+												<p>{{ assignment.assigned|date:'SHORT_DATE_FORMAT' }}</p>
+											</div>
+										</div>
+										<div class="text-center">
+											<button class="js-complete btn-success" data-assignment="{{ assignment.pk }}">
+												Target Eliminated
+											</button>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						{% endfor %}
+
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+	{% endfor %}
+
+{% endblock %}

@@ -1,0 +1,31 @@
+{% load gametags %}
+
+<ul class="game-menu">
+
+	<li>
+		<a href="{% url 'games:view' pk=game.pk %}">Home</a>
+	</li>
+
+	{% if game|is_participant:user %}
+
+		<li>
+			<a href="{% url 'games:news' pk=game.pk %}">News</a>
+		</li>
+
+		<li>
+			<a href="{% url 'games:rules' pk=game.pk %}">Rules</a>
+		</li>
+
+		<li>
+			<a href="{% url 'games:leaderboards' pk=game.pk %}">Rankings</a>
+		</li>
+
+	{% endif %}
+
+	{% if game|is_owner:user or game|is_reviewer:user %}
+		<li>
+			<a href="{% url 'games:manage' pk=game.pk %}">Manage</a>
+		</li>
+	{% endif %}
+
+</ul>

@@ -1,0 +1,28 @@
+{% extends 'Game/base_game_view.html' %}
+{% load staticfiles %}
+{% load require %}
+
+
+{% block inline_styles %}
+	<style type="text/css">
+		.cover-photo { background : url('{{ game.cover.image.url }}') repeat-x; }
+	</style>
+{% endblock %}
+
+{% block inline_scripts %}
+	{% require_module 'scripts/game/shared/affix' %}
+{% endblock %}
+
+{% block game-top-insert %}
+	<div id="cover-photo" class="cover-photo jumbotron">
+		<div class="title-and-menu">
+			<h2>{{ game.title }}</h2>
+		</div>
+	</div>
+{% endblock %}
+
+{% block game-content-section %}
+
+	<div class="intro">{{ game.intro }}</div>
+
+{% endblock %}

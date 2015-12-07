@@ -1,0 +1,73 @@
+{% extends "site.html" %}
+{% load global_tags %}
+{% load staticfiles %}
+{% load account %}
+{% load socialaccount %}
+
+{% block page_styles %}
+	<link href="{% static 'style/Member/login.less' %}" rel="stylesheet" type="text/less"/>
+{% endblock %}
+
+{% block inline_scripts %}
+	{% providers_media_js %}
+{% endblock %}
+
+
+{% block main-contents %}
+	<div class="jumbotron action-area">
+
+		<h3>Account Connections</h3>
+
+		{% if form.accounts %}
+			<p>
+				You can currently log into your account using any of the following third party accounts
+			</p>
+
+			<form method="post" action="{% url 'socialaccount_connections' %}">
+				{% csrf_token %}
+
+				<fieldset>
+					{% if form.non_field_errors %}
+						<div id="errorMsg">{{ form.non_field_errors }}</div>
+					{% endif %}
+
+					{% for base_account in form.accounts %}
+						{% with base_account.get_provider_account as account %}
+							<div>
+								<label for="id_account_{{ base_account.id }}">
+									<input id="id_account_{{ base_account.id }}"
+									       type="radio"
+									       name="account"
+									       value="{{ base_account.id }}"/>
+									<span>
+										{{ account }} ({{ account.get_brand.name }})
+									</span>
+								</label>
+							</div>
+						{% endwith %}
+					{% endfor %}
+
+					<div>
+						<button class="btn btn-default" type="submit">Remove</button>
+					</div>
+
+				</fieldset>
+
+			</form>
+
+		{% else %}
+
+			<p>
+				You currently have no social accounts connected to this account.
+				You can connect with any of the account providers listed below.
+			</p>
+
+			<div>
+				{% include "partials/_providers.html" with process="connect" size='4x' %}
+			</div>
+
+		{% endif %}
+
+	</div>
+{% endblock %}
+

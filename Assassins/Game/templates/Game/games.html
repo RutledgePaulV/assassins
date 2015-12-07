@@ -1,0 +1,38 @@
+{% extends 'site.html' %}
+{% load global_tags %}
+{% load staticfiles %}
+{% load require %}
+
+{% block page_styles %}
+	<link href="{% static 'style/Game/search.less' %}" type="text/less" rel="stylesheet"/>
+{% endblock %}
+
+{% block inline_scripts %}
+	{% require_module 'scripts/game/search/main' %}
+{% endblock %}
+
+{% block main-contents %}
+
+	<div class="container">
+
+		<div class="search-section">
+
+			<p class="center">
+				Search for a game to join, or if you're feeling extra adventurous,
+				go ahead and <a href="{% url 'games:create' %}">create</a> your own.
+			</p>
+
+			<input id="search" class="form-control" type="search"
+			       name="query" data-page="{{ page }}"
+			       placeholder="Search by title, keywords, or location"
+			       value="{{ query }}"/>
+		</div>
+
+		<div>
+			<ul id="results"></ul>
+			<div class="pagination-container"></div>
+		</div>
+
+	</div>
+
+{% endblock %}

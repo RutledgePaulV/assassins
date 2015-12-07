@@ -1,0 +1,41 @@
+{% extends 'site.html' %}
+{% load staticfiles %}
+{% load require %}
+
+
+{% block inline_scripts %}
+	{% require_module 'scripts/geek/main' %}
+{% endblock %}
+
+
+{% block page_styles %}
+	<link href="{% static 'style/Site/geek.less' %}" rel="stylesheet" type="text/less"/>
+{% endblock %}
+
+{% block main-contents %}
+
+
+	<div class="jumbotron action-area">
+		<div class="row">
+			<div id="concentric" class="col-md-4"></div>
+			<div class="col-md-4"></div>
+			<div id="legend" class="col-md-4"></div>
+		</div>
+
+		<br/><br/><br/><br/>
+
+		<div class="row">
+			<div class="col-md-4"></div>
+			<div class="col-md-push-1 col-md-7">
+				<p>
+					<em>Illumine Pixels</em> is made up of a bunch of nerds who love programming.
+					We're a big fan of these languages. In fact, we love programming so much that we
+					want to share our work with whoever we can. You can find the other things we work
+					on via our <a href="//github.com/rutledgepaulv/" target="_blank">github</a>.
+				</p>
+			</div>
+		</div>
+	</div>
+
+
+{% endblock %}

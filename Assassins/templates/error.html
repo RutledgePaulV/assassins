@@ -1,0 +1,23 @@
+{% load staticfiles %}
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>oh no!</title>
+		<link href="{% static 'style/error.less' %}" type="text/less" rel="stylesheet"/>
+	</head>
+	<body>
+		<div id="transy"></div>
+		<div id="wrapper">
+			<div class="logo">
+				<h2 class="text">
+					<strong>{% block error_message %}{% endblock %}</strong>
+				</h2>
+			</div>
+
+			<div>
+				{% block body %}
+				{% endblock %}
+			</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,15 @@
+<div style="position:relative;width:350px;margin:auto">
+	{{#each circles}}
+		<div style="position:absolute;left:{{margin}}px;top:{{margin}}px">
+			<input type="text"
+			       class="dial"
+			       value="{{percentage}}"
+			       data-fgcolor="{{color}}"
+			       data-width="{{diameter}}"
+			       data-height="{{diameter}}"
+			       data-thickness="{{thickness}}"
+			       data-angleOffset="{{angleOffset}}"
+			       data-displayinput="false"/>
+		</div>
+	{{/each}}
+</div>
