@@ -1,0 +1,6 @@
+whoosh/
+__pycache__/
+server_media/
+bower_components/
+serve_static/
+db.sqlite3

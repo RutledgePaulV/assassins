@@ -1,7 +1,7 @@
 from django.conf.urls import include, url
 from django.contrib import admin
 from django.conf import settings
-
+from django.views.defaults import server_error, page_not_found, permission_denied, bad_request
 
 urlpatterns = [
 	url(r'', include('Site.urls', namespace='site', app_name='Site')),
@@ -23,8 +23,8 @@ if settings.DEBUG:
 	from django.conf.urls.static import static
 	urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 	urlpatterns += [
-        url(r'^500/$', 'django.views.defaults.server_error'),
-        url(r'^404/$', 'django.views.defaults.page_not_found'),
-		url(r'^403/$', 'django.views.defaults.permission_denied'),
-		url(r'^400/$', 'django.views.defaults.bad_request'),
+        url(r'^500/$', server_error),
+        url(r'^404/$', page_not_found),
+		url(r'^403/$', permission_denied),
+		url(r'^400/$', bad_request),
     ]

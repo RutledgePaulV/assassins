@@ -6,6 +6,7 @@ from django.template.base import TextNode
 from django.template import Node, TemplateSyntaxError
 from django.template import engines
 from bs4 import BeautifulSoup
+from django.utils.safestring import mark_safe
 
 register = template.Library()
 
@@ -34,13 +35,13 @@ def link(context, reverse_string, display):
 	uri = reverse(reverse_string)
 	current = context.request.get_full_path()
 	if current == uri:
-		return """
+		return mark_safe("""
                 <li class="active"><a href="{0}">{1}</a></li>
-               """.format(uri, display)
+               """.format(uri, display))
 	else:
-		return """
+		return mark_safe("""
                 <li><a href="{0}">{1}</a></li>
-               """.format(uri, display)
+               """.format(uri, display))
 
 
 class PrettyPrintNode(Node):
