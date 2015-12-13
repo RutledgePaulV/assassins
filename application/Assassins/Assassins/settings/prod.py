@@ -15,7 +15,7 @@ COMPRESS_ROOT = STATIC_ROOT
 
 # in production we want to compress everything and run nothing in debug mode
 COMPRESS_ENABLED = True
-TEMPLATE_DEBUG = DEBUG = REQUIRE_DEBUG = False
+DEBUG = REQUIRE_DEBUG = False
 
 # database connection details
 DATABASES = {
