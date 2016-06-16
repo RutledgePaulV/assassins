@@ -23,10 +23,6 @@ I played this game with a lot of friends in college several times. It was fun, d
 to bring strangers together. However it turns out that organizing it can be a pain and no good solutions
 exist yet.
 
-## How close to done is it?
-It's probably 50% complete. As a developer, I'm tempted to say it's actually like 70% complete. But that's probably not true.
-I'd like to 'finish' it by Fall of 2015, so we'll see if I can make some time.
-
 ## Can you help?
 I'm sure you could. However I haven't taken the time to document set up and things like that to really enable a community yet.
 
